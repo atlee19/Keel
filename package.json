@@ -1,0 +1,19 @@
+{
+  "name": "keel",
+  "version": "1.0.0",
+  "description": "A desktop application focused at on managing running docker containers with elegantly simple controls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atlee19/Keel.git"
+  },
+  "author": "Graham Atlee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atlee19/Keel/issues"
+  },
+  "homepage": "https://github.com/atlee19/Keel#readme"
+}
