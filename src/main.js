@@ -1,4 +1,6 @@
 /**
+ * Keel 2021 
+ * 
  * Author:    Graham Atlee
  * Created:   05.11.2021
  * 
@@ -7,32 +9,80 @@
  * This class specifies the entry point of the Electron application
  **/
 const { app, BrowserWindow } = require('electron')
-const path = require('path')
+const { autoUpdater } = require("electron-updater");
+
+var win; //global window object
+
+//-------------------------------------------------------------------
+// Code related to main window creation and closing 
+//-------------------------------------------------------------------
 
 function createWindow () {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+        nodeIntegration : true,
+        contextIsolation : false
     }
   })
-
-  win.loadFile('index.html')
+  win.webContents.openDevTools();
+  const path = require('path')
+  win.loadFile(path.join(__dirname, 'app/index.html'))
 }
-
-app.whenReady().then(() => {
-  createWindow()
-
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
-    }
-  })
-})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
+})
+
+
+//-------------------------------------------------------------------
+// Auto updates 
+//
+// This will immediately download an update, then quit and install
+//-------------------------------------------------------------------
+
+//send any info on updates to main window 
+function sendStatusToWindow(text) {
+    win.webContents.send('update-info', text);
+}
+
+//create the main window and check for any updates
+app.on('ready', function()  {
+    createWindow();
+
+    //if for some reason window didn't launch
+    app.on('activate', () => {
+        if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow();
+        }
+    })
+    autoUpdater.checkForUpdates();
+});
+
+autoUpdater.on('checking-for-update', () => {
+    sendStatusToWindow('Checking for update...');
+});
+
+autoUpdater.on('update-available', (info) => {
+    sendStatusToWindow('Update available.');
+});
+
+autoUpdater.on('update-not-available', (info) => {
+    sendStatusToWindow('Update not available.');
+});
+
+autoUpdater.on('error', (err) => {
+    sendStatusToWindow('Error in auto-updater. ');
+    // console.log(err);
+});
+
+autoUpdater.on('download-progress', (progressObj) => {
+    sendStatusToWindow('Downloading new update...');
+})
+
+autoUpdater.on('update-downloaded', (info) => {
+  autoUpdater.quitAndInstall();  
 })
