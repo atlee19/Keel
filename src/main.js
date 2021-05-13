@@ -9,10 +9,6 @@
  * This class specifies the entry point of the Electron application
  **/
 const { app, BrowserWindow } = require('electron')
-const { autoUpdater } = require("electron-updater");
-
-//currently in development
-autoUpdater.channel = 'alpha';
 
 var win; //global window object
 
@@ -46,6 +42,11 @@ app.on('window-all-closed', () => {
 //
 // This will immediately download an update, then quit and install
 //-------------------------------------------------------------------
+
+const { autoUpdater } = require("electron-updater");
+
+//currently in development
+autoUpdater.channel = 'alpha';
 
 //send any info on updates to main window 
 function sendUpdateStatusToWindow(text) {
