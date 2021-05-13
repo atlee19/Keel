@@ -23,22 +23,13 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+        nodeIntegration : true,
+        contextIsolation : false
     }
   })
-
+  win.webContents.openDevTools();
   win.loadFile(path.join(__dirname, 'src/app/index.html'))
 }
-
-app.whenReady().then(() => {
-  createWindow()
-
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
-    }
-  })
-})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -58,8 +49,17 @@ function sendStatusToWindow(text) {
     win.webContents.send('message', text);
 }
 
+//create the main window and check for any updates
 app.on('ready', function()  {
-  autoUpdater.checkForUpdates();
+    createWindow();
+
+    //if for some reason window didn't launch
+    app.on('activate', () => {
+        if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow();
+        }
+    })
+    autoUpdater.checkForUpdates();
 });
 
 autoUpdater.on('checking-for-update', () => {
@@ -75,7 +75,7 @@ autoUpdater.on('update-not-available', (info) => {
 });
 
 autoUpdater.on('error', (err) => {
-    sendStatusToWindow('Error in auto-updater. ' + err);
+    // sendStatusToWindow('Error in auto-updater. ' + err);
 });
 
 autoUpdater.on('download-progress', (progressObj) => {
