@@ -74,7 +74,9 @@ autoUpdater.on('update-available', (info) => {
 });
 
 autoUpdater.on('update-not-available', (info) => {
-    sendUpdateStatusToWindow('latest version.');
+    //if theres no update then we're on the latest version
+    //temporary way to send latest version. Might want more stable way in future
+    sendUpdateStatusToWindow(`${app.getVersion()}`);
 });
 
 autoUpdater.on('error', (err) => {
