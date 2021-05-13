@@ -10,7 +10,6 @@
  **/
 const { app, BrowserWindow } = require('electron')
 const { autoUpdater } = require("electron-updater");
-const path = require('path')
 
 var win; //global window object
 
@@ -28,6 +27,7 @@ function createWindow () {
     }
   })
   win.webContents.openDevTools();
+  const path = require('path')
   win.loadFile(path.join(__dirname, 'src/app/index.html'))
 }
 
