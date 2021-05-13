@@ -48,7 +48,7 @@ app.on('window-all-closed', () => {
 //-------------------------------------------------------------------
 
 //send any info on updates to main window 
-function sendStatusToWindow(text) {
+function sendUpdateStatusToWindow(text) {
     win.webContents.send('update-info', text);
 }
 
@@ -59,31 +59,31 @@ app.on('ready', function()  {
     //if for some reason window didn't launch
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow();
+          createWindow();
         }
     })
     autoUpdater.checkForUpdates();
 });
 
 autoUpdater.on('checking-for-update', () => {
-    sendStatusToWindow('Checking for update...');
+    sendUpdateStatusToWindow('checking for update...');
 });
 
 autoUpdater.on('update-available', (info) => {
-    sendStatusToWindow('Update available.');
+    sendUpdateStatusToWindow('update available.');
 });
 
 autoUpdater.on('update-not-available', (info) => {
-    sendStatusToWindow('Update not available.');
+    sendUpdateStatusToWindow('latest version.');
 });
 
 autoUpdater.on('error', (err) => {
-    sendStatusToWindow('Error in auto-updater. ');
-    // console.log(err);
+    sendUpdateStatusToWindow('error in auto-updater. ');
+    console.log(err);
 });
 
 autoUpdater.on('download-progress', (progressObj) => {
-    sendStatusToWindow('Downloading new update...');
+    sendUpdateStatusToWindow('downloading new update...');
 })
 
 autoUpdater.on('update-downloaded', (info) => {
