@@ -46,7 +46,7 @@ app.on('window-all-closed', () => {
 
 //send any info on updates to main window 
 function sendStatusToWindow(text) {
-    win.webContents.send('message', text);
+    win.webContents.send('update-info', text);
 }
 
 //create the main window and check for any updates
@@ -75,7 +75,8 @@ autoUpdater.on('update-not-available', (info) => {
 });
 
 autoUpdater.on('error', (err) => {
-    sendStatusToWindow('Error in auto-updater. ' + err);
+    sendStatusToWindow('Error in auto-updater. ');
+    // console.log(err);
 });
 
 autoUpdater.on('download-progress', (progressObj) => {

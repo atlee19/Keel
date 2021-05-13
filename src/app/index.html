@@ -9,9 +9,11 @@
     <h3 id="keel">Keel</h3>
     <script>
         const {ipcRenderer} = require('electron');
-        ipcRenderer.on('message', function(event, text) {
+
+        //update title with latest update-info
+        ipcRenderer.on('update-info', function(event, text) {
             console.log(text);
-            document.getElementById('keel').innerHTML = text;
+            document.title = `Keel - ${text}` 
         })
     </script>
     
