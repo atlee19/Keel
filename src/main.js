@@ -11,6 +11,9 @@
 const { app, BrowserWindow } = require('electron')
 const { autoUpdater } = require("electron-updater");
 
+//currently in development
+autoUpdater.channel = 'alpha';
+
 var win; //global window object
 
 //-------------------------------------------------------------------
