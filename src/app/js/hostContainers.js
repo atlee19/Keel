@@ -36,3 +36,5 @@ const hostContainers = {
         return runningContainers;
     }
 };
+
+module.exports = hostContainers;
