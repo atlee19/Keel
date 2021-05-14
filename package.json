@@ -26,6 +26,7 @@
     "electron-builder": "^22.10.5"
   },
   "dependencies": {
+    "dockerode": "^3.3.0",
     "electron-updater": "^4.3.9"
   }
 }
