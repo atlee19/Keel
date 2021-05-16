@@ -10,14 +10,23 @@
  * docker containers being run on the host. This class is NOT responsilbe
  * for updating the DOM.
  **/
-const Docker = require('dockerode');
 
+//-------------------------------------------------------------------
+// Dockerode dependency setup
+//-------------------------------------------------------------------
+
+const Docker = require('dockerode');
 const socket = process.env.DOCKER_SOCKET || '/var/run/docker.sock';
 const docker = new Docker({ socketPath: socket });
+
+//-------------------------------------------------------------------
+// Host containers class 
+//-------------------------------------------------------------------
 
 const hostContainers = {
 
         //return all running containers on the host's machine
+        //TO-DO : add try catch block for err handling
         list : async function (){
             let runningContainers = [];
             let containerName = '';
