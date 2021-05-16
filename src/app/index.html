@@ -1,3 +1,13 @@
+<!-- 
+* Keel 2021 
+* 
+* Author:    Graham Atlee
+* Created:   05.16.2021
+* 
+* GNU Affero General Public License v3.0
+* 
+* This is the main render point for the Keel UI. 
+ -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +16,6 @@
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 </head>
 <body style="background: white;">
-    <h3 id="keel">Keel</h3>
     <ul id="containerList"></ul>
 
     <script>
@@ -21,6 +30,9 @@
 
     <script>
         const hostContainers = require('./js/hostContainers');
+
+        //get list of running containers and display them
+        //wrapped in async in order to get the result of promise
         (async () => {
             let containerData = await hostContainers.list();
             let containerList = document.getElementById('containerList');
