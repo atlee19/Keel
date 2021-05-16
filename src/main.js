@@ -18,14 +18,14 @@ var win; //global window object
 
 function createWindow () {
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 584,
+    height: 691,
     webPreferences: {
         nodeIntegration : true,
         contextIsolation : false
     }
   })
-  win.webContents.openDevTools();
+  win.webContents.openDevTools({ mode : 'detach' });
   const path = require('path')
   win.loadFile(path.join(__dirname, 'app/index.html'))
 }
