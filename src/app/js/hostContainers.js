@@ -19,9 +19,10 @@ const hostContainers = {
 
         list : async function (){
             let runningContainers = [];
+            let containerName = '';
             const containers = await docker.listContainers({ all : false });
             containers.forEach(container => {
-                let containerName = container.Names[0];
+                containerName = container.Names[0];
                 runningContainers.push(containerName);
             })
  
