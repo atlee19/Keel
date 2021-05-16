@@ -16,25 +16,18 @@ const socket = process.env.DOCKER_SOCKET || '/var/run/docker.sock';
 const docker = new Docker({ socketPath: socket });
 
 const hostContainers = {
-    listRunning = function(){
-        let runningContainers = [];
-       
-        docker.listContainers({ all : false }, function(err, containers){
-            //if no containers are running what gets displayed?
-            for(let container in containers){
-                //get name and date created 
-                let name = containers[container].Names[0];
-                let timeStamp = containers[container].Created;
-                //put it into a json object
-                let containerMetaData = { "name" : name, "created" : timeStamp };
-                //add it to array 
-                runningContainers.push(containerMetaData);
-                //then return it - thats it
-            }
-        })
 
-        return runningContainers;
-    }
+        list : async function (){
+            let runningContainers = [];
+            const containers = await docker.listContainers({ all : false });
+            containers.forEach(container => {
+                let containerName = container.Names[0];
+                runningContainers.push(containerName);
+            })
+ 
+            return runningContainers;
+        }    
+        
 };
 
 module.exports = hostContainers;

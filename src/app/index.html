@@ -7,6 +7,8 @@
 </head>
 <body style="background: white;">
     <h3 id="keel">Keel</h3>
+    <p id="containersList"></p>
+
     <script>
         const {ipcRenderer} = require('electron');
 
@@ -16,7 +18,12 @@
             document.title = `Keel - ${text}` 
         })
     </script>
-    <script src="./js/writeToWindow.js"></script>
+
+    <script>
+        const hostContainers = require('./js/hostContainers');
+        let containerData = hostContainers.list();
+
+    </script>
     
 </body>
 </html>
