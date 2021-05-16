@@ -17,9 +17,12 @@ const docker = new Docker({ socketPath: socket });
 
 const hostContainers = {
 
+        //return all running containers on the host's machine
         list : async function (){
             let runningContainers = [];
             let containerName = '';
+            //pause JS runtime at this line so that no further code will execute 
+            //until the async function has returned it's result.
             const containers = await docker.listContainers({ all : false });
             containers.forEach(container => {
                 containerName = container.Names[0];
