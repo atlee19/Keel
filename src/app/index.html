@@ -7,7 +7,7 @@
 </head>
 <body style="background: white;">
     <h3 id="keel">Keel</h3>
-    <p id="containerList"></p>
+    <ul id="containerList"></ul>
 
     <script>
         const {ipcRenderer} = require('electron');
@@ -25,7 +25,7 @@
             let containerData = await hostContainers.list();
             let containerList = document.getElementById('containerList');
             containerData.forEach(container => {
-                containerList.innerHTML += container;
+                containerList.innerHTML += `<li>${container}</li>`;
             });
         })();
     </script>
