@@ -16,7 +16,10 @@
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 </head>
 <body style="background: white;">
-    <ul id="containerList"></ul>
+
+    <ul class="activeContainerList" id="containerList">
+        <!-- docker container list items will be inserted here -->
+    </ul>
 
     <script>
         const {ipcRenderer} = require('electron');
@@ -37,7 +40,7 @@
             let containerData = await hostContainers.list();
             let containerList = document.getElementById('containerList');
             containerData.forEach(container => {
-                containerList.innerHTML += `<li>${container}</li>`;
+                containerList.innerHTML += `<li class="activeContainer">${container}</li>`;
             });
         })();
     </script>
