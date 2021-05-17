@@ -12,7 +12,7 @@
  /* Individual Container */
 .activeContainer { 
     color: #fff;
-    width: 100%; 
+    width:  100%; 
     height: auto; 
     min-height: 50px; 
     line-height: 2; 
@@ -67,11 +67,14 @@
 }
 
 .activeContainer.completing { 
-    text-decoration: line-through; background-color: green; 
+    text-decoration: line-through;
+    background-color: green; 
 }
 
 .activeContainer.completed { 
-    opacity: 0.5; text-decoration: line-through; background-color: #323232; 
+    opacity: 0.5; 
+    text-decoration: line-through; 
+    background-color: #323232; 
 }
 
 .activeContainer.completed:before { 
