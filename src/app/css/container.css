@@ -9,6 +9,8 @@
  * This stylsheet is only in charge of styling the individual containers
  **/
 
+/* html { box-sizing: border-box;  } */
+
  /* Individual Container */
 .activeContainer { 
     color: #fff;
