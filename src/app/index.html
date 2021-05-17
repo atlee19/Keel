@@ -35,7 +35,6 @@
 
     <script>
         const hostContainers = require('./js/hostContainers');
-
         //get list of running containers and display them
         //wrapped in async in order to get the result of promise
         (async () => {
@@ -44,9 +43,14 @@
             containerData.forEach(container => {
                 containerList.innerHTML += `<li class="activeContainer">${container}</li>`;
             });
+            console.log('containers added to page!');
+            const swipeContainers = require('./js/swipeContainer.js');
+            swipeContainers.swipe();
         })();
+
     </script>
-    
+
+
 </body>
 </html>
 

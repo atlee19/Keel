@@ -12,11 +12,12 @@
  * Docker containers
  **/
 
- NodeList.prototype.forEach = Array.prototype.forEach; //not sure what this is yet
+NodeList.prototype.forEach = Array.prototype.forEach; //not sure what this is yet
 
  //	Grab our nodes
 const activeContainerList = document.querySelector('.activeContainerList');
 const activeContainers = activeContainerList.querySelectorAll('.activeContainer');
+console.log(activeContainers);
 
 // Temp
 let initialX = 0;
@@ -38,19 +39,19 @@ function getPointerX(e) {
 
 function getContainerPositionPercentage(container) {
     //	get task offset relative to list
-    var containerLeft = container.getBoundingClientRect().left - list.getBoundingClientRect().left;
+    var containerLeft = container.getBoundingClientRect().left - activeContainerList.getBoundingClientRect().left;
     //	return left offset percentage of width
     return Math.floor(containerLeft / container.offsetWidth * 100);
 }
 
 
 function animateContainerHeight(container) {
-    let taskHeight = container.offsetHeight;
+    let containerHeight = container.offsetHeight;
     //	remove padding, min-height to allow height animation
     container.style.padding = 0;
     container.style.minHeight = 0;
     //	set height as px value to allow height animation
-    container.style.height = `${taskHeight}px`;
+    container.style.height = `${containerHeight}px`;
     //	add transition, force layout  and set height to 0
     container.style.transition = `height ${heightAnimLength}ms ease-out`;
     container.getBoundingClientRect();
@@ -104,10 +105,10 @@ function updateContainerStyle(container) {
 
 function updateContainerStatus(container) {
     //	get percentage position of task
-    let percentage = getTaskPositionPercentage(container);
+    let percentage = getContainerPositionPercentage(container);
     //	set task status if over/under threshold
-    if (percentage > dragOffsetToUpdate && !task.classList.contains(classComplete)) setContainerComplete(task);
-    if (percentage < dragOffsetToUpdate * -1) setContainerDelete(task);
+    if (percentage > dragOffsetToUpdate && !container.classList.contains(classComplete)) setContainerComplete(container);
+    if (percentage < dragOffsetToUpdate * -1) setContainerDelete(container);
 }
 
 //	Bind events
@@ -178,9 +179,16 @@ function eventMouseUp(e) {
 
 function init() {
     activeContainers.forEach(container => {
-        setTaskStyle(container);
+        setContainerStyle(container);
         bindMouseDown(container);
     });
 }
-  
-init();
+
+const swipeContainers = {
+    swipe : function(){
+        console.log('swipe called');
+        init();
+    }
+}
+
+module.exports = swipeContainers;
