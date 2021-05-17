@@ -14,6 +14,7 @@
 /* Container List */
 .activeContainerList { 
     background-color: #272822; 
-    min-height: 400px; 
+    /* min-height: 400px;    hold off on this */
     overflow: hidden; 
+    list-style-type: none;
 }

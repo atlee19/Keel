@@ -22,7 +22,7 @@
     transition: background-color 1s; 
 }
 
-.activeContainer:before, .task:after { 
+.activeContainer:before, .activeContainer:after { 
     position: absolute; 
     top: 0; 
     width: 40px; 
@@ -32,12 +32,12 @@
 }
 
 .activeContainer:before { 
-    content: "\2714"; 
+    content: "\2714";   /* checkmark thing */
     left: -40px;
 }
 
 .activeContainer:after { 
-    content: "\2718"; 
+    content: "\2718"; /* x mark thing */
     right: -40px; 
 }
 
