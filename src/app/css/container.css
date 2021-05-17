@@ -9,7 +9,6 @@
  * This stylsheet is only in charge of styling the individual containers
  **/
 
-/* html { box-sizing: border-box;  } */
 
  /* Individual Container */
 .activeContainer { 
@@ -34,7 +33,9 @@
 }
 
 .activeContainer:before { 
-    content: "\2714";   /* checkmark thing */
+    /* checkmark thing */
+    /* content: "\2714";  */
+    content: "\274E";
     left: -40px;
 }
 
