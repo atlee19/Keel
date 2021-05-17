@@ -43,9 +43,10 @@
             containerData.forEach(container => {
                 containerList.innerHTML += `<li class="activeContainer">${container}</li>`;
             });
-            console.log('containers added to page!');
+
+            //once the containers are written to the page we can the enable the swiping UI logic
             const swipeContainers = require('./js/swipeContainer.js');
-            swipeContainers.swipe();
+            swipeContainers.enableSwipe();
         })();
 
     </script>

@@ -17,7 +17,6 @@ NodeList.prototype.forEach = Array.prototype.forEach; //not sure what this is ye
  //	Grab our nodes
 const activeContainerList = document.querySelector('.activeContainerList');
 const activeContainers = activeContainerList.querySelectorAll('.activeContainer');
-console.log(activeContainers);
 
 // Temp
 let initialX = 0;
@@ -185,8 +184,7 @@ function init() {
 }
 
 const swipeContainers = {
-    swipe : function(){
-        console.log('swipe called');
+    enableSwipe : function(){
         init();
     }
 }
