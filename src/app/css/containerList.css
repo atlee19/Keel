@@ -1,0 +1,19 @@
+/**
+ * Keel 2021 
+ * 
+ * Author:    Graham Atlee
+ * Created:   05.17.2021
+ * 
+ * GNU Affero General Public License v3.0
+ * 
+ * This stylsheet is only in charge of styling the list in which the 
+ * individual containers will be displayed. Not the containers themselves
+ **/
+
+
+/* Container List */
+.activeContainerList { 
+    background-color: #272822; 
+    min-height: 400px; 
+    overflow: hidden; 
+}
