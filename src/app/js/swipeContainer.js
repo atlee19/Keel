@@ -31,13 +31,13 @@ const classComplete = 'completed';
 
 // Utils
 function getPointerX(e) {
-    //	return pointer offset relative to task list
+    //	return pointer offset relative to container list
     const containerList = e.target.parentNode;
     return e.clientX - containerList.getBoundingClientRect().left;
 }
 
 function getContainerPositionPercentage(container) {
-    //	get task offset relative to list
+    //	get container offset relative to list
     var containerLeft = container.getBoundingClientRect().left - activeContainerList.getBoundingClientRect().left;
     //	return left offset percentage of width
     return Math.floor(containerLeft / container.offsetWidth * 100);
@@ -64,7 +64,7 @@ function setContainerStyle(container) {
     container.style.webkitUserSelect = 'none';
 }
 
-//	Tasks
+// Containers
 function setContainerComplete(container) {
     //	slide off screen to the right
     container.style.transform = 'translateX(120%)';
@@ -76,7 +76,7 @@ function setContainerComplete(container) {
       container.style.padding = '';
       container.style.minHeight = '';
       container.style.height = '';
-      //	add transform transition, append task to end of list
+      //	add transform transition, append container to end of list
       container.style.transition = `transform ${transformAnimLength}ms ease-out`;
       container.parentNode.appendChild(container);
       //	force layout and set new transform value to slide back in
@@ -95,7 +95,7 @@ function setContainerDelete(container) {
 
 //	Actions
 function updateContainerStyle(container) {
-    //	get percentage position of task
+    //	get percentage position of container
     let percentage = getContainerPositionPercentage(container);
     //	toggle classes if below or above certain threshold
     container.classList.toggle(classCompleting, percentage > dragOffsetToUpdate);
@@ -103,9 +103,9 @@ function updateContainerStyle(container) {
 }
 
 function updateContainerStatus(container) {
-    //	get percentage position of task
+    //	get percentage position of container
     let percentage = getContainerPositionPercentage(container);
-    //	set task status if over/under threshold
+    //	set container status if over/under threshold
     if (percentage > dragOffsetToUpdate && !container.classList.contains(classComplete)) setContainerComplete(container);
     if (percentage < dragOffsetToUpdate * -1) setContainerDelete(container);
 }
@@ -162,7 +162,7 @@ function eventMouseMove(e) {
 }
 
 function eventMouseUp(e) {
-    //	get current task
+    //	get current container
     let container = e.target;
     //  unbind events
     unbindMouseMove(container);
@@ -171,7 +171,7 @@ function eventMouseUp(e) {
     //	set transition, reset translate
     container.style.transition = `transform ${transformAnimLength * 2}ms ease-out`;
     container.style.transform = 'translateX(0)';
-    //	update task status
+    //	update container status
     updateContainerStatus(container);
 }
   
@@ -183,6 +183,7 @@ function init() {
     });
 }
 
+//module export - KIM everything will get allocated the moment we call require 
 const swipeContainers = {
     enableSwipe : function(){
         init();
