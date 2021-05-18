@@ -61,13 +61,6 @@ function animateContainerHeight(container) {
     container.style.height = 0;
 }
 
-// //this function isn't necessary
-// function setContainerStyle(container) {
-//     //	update some key styles as I'm not allowed to touch the CSS...
-//     container.style.cursor = 'pointer';
-//     container.style.userSelect = 'none';
-//     container.style.webkitUserSelect = 'none';
-// }
 
 // Containers
 function stopContainer(container) {
@@ -89,6 +82,7 @@ function stopContainer(container) {
       container.style.transform = 'translateX(0)';
     }, 500);
 
+    //call to dockerode service to actually stop the container 
     stopSpecificContainer(container.id);
 }
 
