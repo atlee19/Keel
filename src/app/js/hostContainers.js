@@ -43,7 +43,11 @@ const hostContainers = {
             })
  
             return runningContainers;
-        }    
+        },
+        
+        stopSpecificContainer : function(containerId){
+            docker.getContainer(containerId).stop();
+        }
         
 };
 
