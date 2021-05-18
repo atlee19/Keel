@@ -197,7 +197,7 @@ function init() {
 //module export - KIM everything will get allocated the moment we call require 
 //not a big fan of how I did this.
 const swipeContainers = {
-    enableSwipe : function(){
+    enableSwiping : function(){
         init();
     }
 }
