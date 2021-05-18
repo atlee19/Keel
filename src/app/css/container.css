@@ -9,10 +9,16 @@
  * This stylsheet is only in charge of styling the individual containers
  **/
 
+@font-face {
+    font-family: SFProDisplay-Regular;
+    src: url(../assets/fonts/SFProDisplay-Regular.ttf);
+}
+
 
  /* Individual Container */
 .activeContainer { 
     color: #fff;
+    font-family: SFProDisplay-Regular;
     width:  100%; 
     height: auto; 
     min-height: 50px; 
