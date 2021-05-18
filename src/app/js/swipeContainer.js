@@ -20,6 +20,8 @@ NodeList.prototype.forEach = Array.prototype.forEach; //not sure what this is ye
 const activeContainerList = document.querySelector('.activeContainerList');
 const activeContainers = activeContainerList.querySelectorAll('.activeContainer');
 
+const stopSpecificContainer = require('./hostContainers').stopSpecificContainer;
+
 // Temp
 let initialX = 0;
 
@@ -68,7 +70,7 @@ function animateContainerHeight(container) {
 // }
 
 // Containers
-function setContainerComplete(container) {
+function stopContainer(container) {
     //	slide off screen to the right
     container.style.transform = 'translateX(120%)';
     //	animate height to 0, reset then slide back in
@@ -86,6 +88,8 @@ function setContainerComplete(container) {
       container.getBoundingClientRect();
       container.style.transform = 'translateX(0)';
     }, 500);
+
+    stopSpecificContainer(container.id);
 }
 
 //the function that actually triggers deleting the container.
@@ -116,7 +120,7 @@ function updateContainerStatus(container) {
     //set container status if over/under threshold
     //if container dragged right behond the threshold and released then set the container
     //is called
-    if (percentage > dragOffsetToUpdate && !container.classList.contains(classComplete)) setContainerComplete(container);
+    if (percentage > dragOffsetToUpdate && !container.classList.contains(classComplete)) stopContainer(container);
     //if container dragged left beyond the threshold and released then set delete the container
     //will be called 
     if (percentage < dragOffsetToUpdate * -1) setContainerDelete(container);
