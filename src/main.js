@@ -20,6 +20,7 @@ function createWindow () {
   win = new BrowserWindow({
     width: 584,
     height: 691,
+    icon: __dirname + 'app/assets/icons/keel.png',
     webPreferences: {
         nodeIntegration : true,
         contextIsolation : false
