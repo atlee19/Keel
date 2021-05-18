@@ -24,6 +24,13 @@
     background-image: linear-gradient(#0bbcf1,#05acdd);
 }
 
+/* handle user cursor settings */
+.activeContainer {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 .activeContainer:before, .activeContainer:after { 
     position: absolute; 
     top: 0; 
