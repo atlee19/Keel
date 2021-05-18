@@ -10,6 +10,8 @@
  * involved with the container list displayed in the main window.
  * There is to be NO logic involved with closing, starting etc. of 
  * Docker containers
+ * 
+ * Remeber there is STOPPING a container and DELETING a container
  **/
 
 NodeList.prototype.forEach = Array.prototype.forEach; //not sure what this is yet
@@ -22,7 +24,7 @@ const activeContainers = activeContainerList.querySelectorAll('.activeContainer'
 let initialX = 0;
 
 // Settings
-const dragOffsetToUpdate = 25;
+const dragOffsetToUpdate = 25; //threshold for dragging left or right before toggle changes
 const heightAnimLength = 150;
 const transformAnimLength = 150;
 const classCompleting = 'completing';
@@ -57,12 +59,13 @@ function animateContainerHeight(container) {
     container.style.height = 0;
 }
 
-function setContainerStyle(container) {
-    //	update some key styles as I'm not allowed to touch the CSS...
-    container.style.cursor = 'pointer';
-    container.style.userSelect = 'none';
-    container.style.webkitUserSelect = 'none';
-}
+// //this function isn't necessary
+// function setContainerStyle(container) {
+//     //	update some key styles as I'm not allowed to touch the CSS...
+//     container.style.cursor = 'pointer';
+//     container.style.userSelect = 'none';
+//     container.style.webkitUserSelect = 'none';
+// }
 
 // Containers
 function setContainerComplete(container) {
@@ -85,28 +88,37 @@ function setContainerComplete(container) {
     }, 500);
 }
 
+//the function that actually triggers deleting the container.
 function setContainerDelete(container) {
-    //	slide off screen to the left
+    //slide off screen to the left
     container.style.transform = 'translateX(-120%)';
-    //	animate height to 0 then remove
+    //animate height to 0 then remove
     setTimeout(() => animateContainerHeight(container), 350);
     setTimeout(() => container.parentNode.removeChild(container), 500);
 }
 
-//	Actions
+//Actions
+
+//this function name is misleading?
 function updateContainerStyle(container) {
     //	get percentage position of container
     let percentage = getContainerPositionPercentage(container);
-    //	toggle classes if below or above certain threshold
+    //toggle classes if below or above certain threshold
+    //if positive percentage (being dragged right) then the class list updated to completing
     container.classList.toggle(classCompleting, percentage > dragOffsetToUpdate);
+    //if negative percentage (being dragged left) then the class list is updated to deleting
     container.classList.toggle(classDeleting, percentage < dragOffsetToUpdate * -1);
 }
 
 function updateContainerStatus(container) {
-    //	get percentage position of container
+    //get percentage position of container
     let percentage = getContainerPositionPercentage(container);
-    //	set container status if over/under threshold
+    //set container status if over/under threshold
+    //if container dragged right behond the threshold and released then set the container
+    //is called
     if (percentage > dragOffsetToUpdate && !container.classList.contains(classComplete)) setContainerComplete(container);
+    //if container dragged left beyond the threshold and released then set delete the container
+    //will be called 
     if (percentage < dragOffsetToUpdate * -1) setContainerDelete(container);
 }
 
@@ -178,12 +190,12 @@ function eventMouseUp(e) {
 
 function init() {
     activeContainers.forEach(container => {
-        setContainerStyle(container);
         bindMouseDown(container);
     });
 }
 
 //module export - KIM everything will get allocated the moment we call require 
+//not a big fan of how I did this.
 const swipeContainers = {
     enableSwipe : function(){
         init();
