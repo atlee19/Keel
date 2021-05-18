@@ -15,7 +15,6 @@ var win; //global window object
 //-------------------------------------------------------------------
 // Code related to main window creation and closing 
 //-------------------------------------------------------------------
-
 function createWindow () {
   win = new BrowserWindow({
     width: 584,
