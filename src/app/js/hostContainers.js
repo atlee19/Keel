@@ -47,6 +47,11 @@ const hostContainers = {
         
         stopSpecificContainer : function(containerId){
             docker.getContainer(containerId).stop();
+
+            //display notification to user that container has been stopped
+            const myNotification = new Notification('Container stopped', {
+                body: `${containerId} has been stopped.`
+            })
         }
         
 };
