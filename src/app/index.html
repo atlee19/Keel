@@ -34,11 +34,11 @@
     </script>
 
     <script>
-        const hostContainers = require('./js/hostContainers');
+        const getListOfActiveContainers = require('./js/hostContainers').getListOfActiveContainers;
         //get list of running containers and display them
         //wrapped in async in order to get the result of promise
         (async () => {
-            let containerData = await hostContainers.list();
+            let containerData = await getListOfActiveContainers();
             let containerList = document.getElementById('containerList');
             containerData.forEach(container => {
                 containerList.innerHTML += `<li class="activeContainer">${container.Name}</li>`;

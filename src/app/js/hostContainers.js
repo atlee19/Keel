@@ -25,9 +25,9 @@ const docker = new Docker({ socketPath: socket });
 
 const hostContainers = {
 
-        //return all running containers on the host's machine
+        //return json object with all running containers on the host's machine
         //TO-DO : add try catch block for err handling
-        list : async function (){
+        getListOfActiveContainers : async function (){
             let runningContainers = [];
             let containerName = '';
             //pause JS runtime at this line so that no further code will execute 
