@@ -34,8 +34,12 @@ const hostContainers = {
             //until the async function has returned it's result.
             const containers = await docker.listContainers({ all : false });
             containers.forEach(container => {
+                containerID = container.Id;
                 containerName = container.Names[0];
-                runningContainers.push(containerName);
+                runningContainers.push({
+                    "Id": containerID,
+                    "Name": containerName
+                });
             })
  
             return runningContainers;
