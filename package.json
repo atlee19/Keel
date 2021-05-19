@@ -1,13 +1,13 @@
 {
   "name": "keel",
-  "version": "0.5.2-alpha",
+  "version": "0.5.3-alpha",
   "description": "A desktop application focused at on managing running docker containers with elegantly simple controls",
   "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "build": "electron-builder build --mac --linux -p never",
-    "publish": "electron-builder build --mac -p always"
+    "publish": "electron-builder build --mac --linux -p always"
   },
   "build": {
     "generateUpdatesFilesForAllChannels": true
