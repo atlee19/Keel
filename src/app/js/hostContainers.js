@@ -14,7 +14,6 @@
 
 
 const hostContainers = (function(){
-    console.log('hostcontainers');
     const Docker = require('dockerode');
     const socket = process.env.DOCKER_SOCKET || '/var/run/docker.sock';
     const docker = new Docker({ socketPath : socket });
@@ -57,51 +56,3 @@ const hostContainers = (function(){
 
 
 module.exports = hostContainers;
-
-
-
-//-------------------------------------------------------------------
-// Dockerode dependency setup
-//-------------------------------------------------------------------
-
-// const Docker = require('dockerode');
-// const socket = process.env.DOCKER_SOCKET || '/var/run/docker.sock';
-// const docker = new Docker({ socketPath: socket });
-
-//-------------------------------------------------------------------
-// Host containers class 
-//-------------------------------------------------------------------
-// const hostContainers = {
-
-//         //return json object with all running containers on the host's machine
-//         //TO-DO : add try catch block for err handling
-//         getListOfActiveContainers : async function (){
-//             let runningContainers = [];
-//             let containerName = '';
-//             //pause JS runtime at this line so that no further code will execute 
-//             //until the async function has returned it's result.
-//             const containers = await docker.listContainers({ all : false });
-//             containers.forEach(container => {
-//                 containerID = container.Id;
-//                 containerName = container.Names[0];
-//                 runningContainers.push({
-//                     "Id": containerID,
-//                     "Name": containerName
-//                 });
-//             })
- 
-//             return runningContainers;
-//         },
-        
-//         stopSpecificContainer : function(containerId){
-//             docker.getContainer(containerId).stop();
-
-//             //display notification to user that container has been stopped
-//             const myNotification = new Notification('Container stopped', {
-//                 body: `${containerId} has been stopped.`
-//             })
-//         }
-        
-// };
-
-// module.exports = hostContainers;
