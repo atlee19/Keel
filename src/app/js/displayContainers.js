@@ -12,5 +12,27 @@
  **/
 
 const displayContainers = (function(){
-    //pass
+
+    const hostContainers = require('./hostContainers');
+
+    async function show(){
+        let containerData = await hostContainers.GetListOfActiveContainers();
+        let containerList = document.getElementById('containerList');
+        containerData.forEach(container => {
+            containerList.innerHTML += `<li 
+            id=${container.Id} class="activeContainer">${container.Name}</li>`;
+        });
+
+        //once the containers are written to the page we can the enable the swiping UI logic
+        //must be done like this - for now.
+        const swipeContainers = require('./swipeContainer');
+        swipeContainers.EnableSwiping();
+    }
+
+    return{
+        Show: show
+    }
 })();
+
+
+module.exports = displayContainers;
