@@ -34,13 +34,13 @@ const swipeContainers = (function (){
     const classComplete = 'completed';
 
     // Utility functions
-    function getPointerX(e) {
+    function _getPointerX(e) {
         //	return pointer offset relative to container list
         const containerList = e.target.parentNode;
         return e.clientX - containerList.getBoundingClientRect().left;
     }
 
-    function getContainerPositionPercentage(container) {
+    function _getContainerPositionPercentage(container) {
         //	get container offset relative to list
         var containerLeft = container.getBoundingClientRect().left - activeContainerList.getBoundingClientRect().left;
         //	return left offset percentage of width
@@ -48,7 +48,7 @@ const swipeContainers = (function (){
     }
 
 
-    function animateContainerHeight(container) {
+    function _animateContainerHeight(container) {
         let containerHeight = container.offsetHeight;
         //	remove padding, min-height to allow height animation
         container.style.padding = 0;
@@ -62,11 +62,11 @@ const swipeContainers = (function (){
     }
 
         // Containers
-    function stopContainer(container) {
+    function _stopContainer(container) {
         //	slide off screen to the right
         container.style.transform = 'translateX(120%)';
         //	animate height to 0, reset then slide back in
-        setTimeout(() => animateContainerHeight(container), 350);
+        setTimeout(() => _animateContainerHeight(container), 350);
         setTimeout(() => {
         container.classList.add(classComplete);
         //	reset the default styles
@@ -86,20 +86,20 @@ const swipeContainers = (function (){
     }
 
     //the function that actually triggers deleting the container.
-    function setContainerDelete(container) {
+    function _setContainerDelete(container) {
         //slide off screen to the left
         container.style.transform = 'translateX(-120%)';
         //animate height to 0 then remove
-        setTimeout(() => animateContainerHeight(container), 350);
+        setTimeout(() => _animateContainerHeight(container), 350);
         setTimeout(() => container.parentNode.removeChild(container), 500);
     }
 
     //Actions
 
     //this function name is misleading?
-    function updateContainerStyle(container) {
+    function _updateContainerStyle(container) {
         //	get percentage position of container
-        let percentage = getContainerPositionPercentage(container);
+        let percentage = _getContainerPositionPercentage(container);
         //toggle classes if below or above certain threshold
         //if positive percentage (being dragged right) then the class list updated to completing
         container.classList.toggle(classCompleting, percentage > dragOffsetToUpdate);
@@ -107,87 +107,87 @@ const swipeContainers = (function (){
         container.classList.toggle(classDeleting, percentage < dragOffsetToUpdate * -1);
     }
 
-    function updateContainerStatus(container) {
+    function _updateContainerStatus(container) {
         //get percentage position of container
-        let percentage = getContainerPositionPercentage(container);
+        let percentage = _getContainerPositionPercentage(container);
         //set container status if over/under threshold
         //if container dragged right behond the threshold and released then set the container
         //is called
-        if (percentage > dragOffsetToUpdate && !container.classList.contains(classComplete)) stopContainer(container);
+        if (percentage > dragOffsetToUpdate && !container.classList.contains(classComplete)) _stopContainer(container);
         //if container dragged left beyond the threshold and released then set delete the container
         //will be called 
-        if (percentage < dragOffsetToUpdate * -1) setContainerDelete(container);
+        if (percentage < dragOffsetToUpdate * -1) _setContainerDelete(container);
     }
 
     //	Bind events
-    function bindMouseDown(container) {
-        container.addEventListener('mousedown', eventMouseDown);
+    function _bindMouseDown(container) {
+        container.addEventListener('mousedown', _eventMouseDown);
     }
-    function bindMouseMove(container) {
-        container.addEventListener('mousemove', eventMouseMove);
+    function _bindMouseMove(container) {
+        container.addEventListener('mousemove', _eventMouseMove);
     }
-    function bindMouseUp(container) {
-        container.addEventListener('mouseup', eventMouseUp);
+    function _bindMouseUp(container) {
+        container.addEventListener('mouseup', _eventMouseUp);
     }
-    function bindMouseLeave(container) {
-        container.addEventListener('mouseleave', eventMouseUp);
+    function _bindMouseLeave(container) {
+        container.addEventListener('mouseleave', _eventMouseUp);
     }
 
     //	Unbind events
-    function unbindMouseDown(container) {
-        container.removeEventListener('mousedown', eventMouseDown);
+    function _unbindMouseDown(container) {
+        container.removeEventListener('mousedown', _eventMouseDown);
     }
-    function unbindMouseMove(container) {
-        container.removeEventListener('mousemove', eventMouseMove);
+    function _unbindMouseMove(container) {
+        container.removeEventListener('mousemove', _eventMouseMove);
     }
-    function unbindMouseUp(container) {
-        container.removeEventListener('mouseup', eventMouseUp);
+    function _unbindMouseUp(container) {
+        container.removeEventListener('mouseup', _eventMouseUp);
     }
-    function unbindMouseLeave(container) {
-        container.removeEventListener('mouseleave', eventMouseUp);
+    function _unbindMouseLeave(container) {
+        container.removeEventListener('mouseleave', _eventMouseUp);
     }
 
     //	Events
-    function eventMouseDown(e) {
+    function _eventMouseDown(e) {
         //	cancel if right-click
         if (e.buttons !== 1) return;
         let container = e.target;
-        initialX = getPointerX(e);
+        initialX = _getPointerX(e);
         //	reset transition
         container.style.transition = '';
         //	bind mouse events
-        bindMouseMove(container);
-        bindMouseUp(container);
-        bindMouseLeave(container);
+        _bindMouseMove(container);
+        _bindMouseUp(container);
+        _bindMouseLeave(container);
     }
 
-    function eventMouseMove(e) {
+    function _eventMouseMove(e) {
         let container = e.target;
-        let offsetX = getPointerX(e);
+        let offsetX = _getPointerX(e);
         //	set transform to offset
         container.style.transform = `translateX(${Math.floor(offsetX - initialX)}px)`;
         //	update visual
-        updateContainerStyle(container);
+        _updateContainerStyle(container);
     }
 
-    function eventMouseUp(e) {
+    function _eventMouseUp(e) {
         //	get current container
         let container = e.target;
         //  unbind events
-        unbindMouseMove(container);
-        unbindMouseUp(container);
-        unbindMouseLeave(container);
+        _unbindMouseMove(container);
+        _unbindMouseUp(container);
+        _unbindMouseLeave(container);
         //	set transition, reset translate
         container.style.transition = `transform ${transformAnimLength * 2}ms ease-out`;
         container.style.transform = 'translateX(0)';
         //	update container status
-        updateContainerStatus(container);
+        _updateContainerStatus(container);
     }
     
 
     function enableSwiping() {
         activeContainers.forEach(container => {
-            bindMouseDown(container);
+            _bindMouseDown(container);
         });
     }
 
