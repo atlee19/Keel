@@ -14,6 +14,7 @@
 
 
 const hostContainers = (function(){
+    console.log('hostcontainers');
     const Docker = require('dockerode');
     const socket = process.env.DOCKER_SOCKET || '/var/run/docker.sock';
     const docker = new Docker({ socketPath : socket });
