@@ -38,26 +38,5 @@
         displayContainers.Show();
     </script>
 
-    <!-- <script>
-        const hostContainers = require('./js/hostContainers');
-        //get list of running containers and display them
-        //wrapped in async in order to get the result of promise
-        (async () => {
-            let containerData = await hostContainers.GetListOfActiveContainers();
-            let containerList = document.getElementById('containerList');
-            containerData.forEach(container => {
-                containerList.innerHTML += `<li 
-                id=${container.Id} class="activeContainer">${container.Name}</li>`;
-            });
-
-            //once the containers are written to the page we can the enable the swiping UI logic
-            const swipeContainers = require('./js/swipeContainer.js');
-            swipeContainers.EnableSwiping();
-        })();
-
-    </script> -->
-
-
 </body>
 </html>
-
