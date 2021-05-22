@@ -11,8 +11,6 @@
  * for updating the DOM.
  **/
 
-
-
 const hostContainers = (function(){
     const Docker = require('dockerode');
     const socket = process.env.DOCKER_SOCKET || '/var/run/docker.sock';
