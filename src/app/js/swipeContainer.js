@@ -20,7 +20,7 @@ NodeList.prototype.forEach = Array.prototype.forEach; //not sure what this is ye
 const activeContainerList = document.querySelector('.activeContainerList');
 const activeContainers = activeContainerList.querySelectorAll('.activeContainer');
 
-const stopSpecificContainer = require('./hostContainers').stopSpecificContainer;
+const hostContainers = require('./hostContainers');
 
 // Temp
 let initialX = 0;
@@ -83,7 +83,7 @@ function stopContainer(container) {
     }, 500);
 
     //call to dockerode service to actually stop the container 
-    stopSpecificContainer(container.id);
+    hostContainers.StopSpecificContainer(container.id);
 }
 
 //the function that actually triggers deleting the container.
