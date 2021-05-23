@@ -21,8 +21,8 @@ const displayContainers = (function(){
         containerData.forEach(container => {
             containerList.innerHTML += `
                 <li id=${container.Id} class="activeContainer">${container.Name}
-                    <ul>
-                        <li>image: ${container.Id}</li>
+                    <ul class="containerMetaData">
+                        <li>image: ${container.Image}</li>
                     </ul>
                 </li>`;
         });

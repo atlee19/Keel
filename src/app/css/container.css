@@ -111,3 +111,16 @@
 .activeContainer.deleting { 
     background-color: #323232; 
 }
+
+/*-----------------------------------------------------------
+ *    Container meta data styling
+ *----------------------------------------------------------
+ */
+
+.containerMetaData {
+    font-family: SFProDisplay-Regular;
+    list-style-type: none;
+    color: white;
+    font-size: small;
+    text-align: left;
+}
