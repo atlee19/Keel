@@ -1,6 +1,6 @@
 #! /bin/bash
 
-SLEEP_TIME=300
+SLEEP_TIME=3000
 NUM_CONTAINERS=5
 i=0
 
