@@ -18,11 +18,13 @@ const displayContainers = (function(){
     async function show(){
         let containerData = await hostContainers.GetListOfActiveContainers();
         let containerList = document.getElementById('containerList');
+        //loop through each container and append it to the DOM as an html element 
         containerData.forEach(container => {
             containerList.innerHTML += `
                 <li id=${container.Id} class="activeContainer">${container.Name}
                     <ul class="containerMetaData">
-                        <li>image: ${container.Image}</li>
+                        <li style="display: inline;">image: ${container.Image}</li>
+                        <li style="display: inline; margin-left: 3%">id: ${container.Id}</li>
                     </ul>
                 </li>`;
         });
