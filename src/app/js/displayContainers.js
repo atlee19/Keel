@@ -19,8 +19,12 @@ const displayContainers = (function(){
         let containerData = await hostContainers.GetListOfActiveContainers();
         let containerList = document.getElementById('containerList');
         containerData.forEach(container => {
-            containerList.innerHTML += `<li 
-            id=${container.Id} class="activeContainer">${container.Name}</li>`;
+            containerList.innerHTML += `
+                <li id=${container.Id} class="activeContainer">${container.Name}
+                    <ul>
+                        <li>image: ${container.Id}</li>
+                    </ul>
+                </li>`;
         });
 
         //once the containers are written to the page we can the enable the swiping UI logic
