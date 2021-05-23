@@ -97,7 +97,7 @@
 
 .activeContainer.completing { 
     text-decoration: line-through;
-    background-color: green; 
+    background-color: #5c0000; 
 }
 
 .activeContainer.completed { 
