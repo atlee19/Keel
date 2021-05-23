@@ -27,10 +27,10 @@ const hostContainers = (function(){
         const containers = await docker.listContainers({ all : false });
         containers.forEach(container => {
             containerID = container.Id.slice(0,12);
-            containerName = container.Names[0];
+            containerName = container.Names[0].substring(1);
             containerImage = container.Image;
             containerStatus = container.Status;
-            
+
             runningContainers.push({
                 "Id": containerID,
                 "Name": containerName,
