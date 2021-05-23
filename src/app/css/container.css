@@ -61,7 +61,7 @@
 
 .activeContainer:not(.completed):not(.completing) { 
     border-bottom: 2px
-    solid #0699c5;  
+    /* solid #0699c5;   */
 }
 /* 
     option 1 : dark blue to light blue 
