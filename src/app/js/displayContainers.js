@@ -26,8 +26,13 @@ const displayContainers = (function(){
                         <li style="display: inline;">
                             <span style="color: #646464">image:   </span>${container.Image}
                         </li>
+                        
                         <li style="display: inline; margin-left: 3%">
                             <span style="color: #646464">id:   </span>${container.Id}
+                        </li>
+
+                        <li style="display: inline; margin-left: 3%">
+                            <span style="color: #646464">status:   </span>${container.Status}
                         </li>
                     </ul>
                 </li>`;

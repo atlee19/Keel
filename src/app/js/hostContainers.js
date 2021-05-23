@@ -20,18 +20,22 @@ const hostContainers = (function(){
         let runningContainers = [];
         let containerName = '';
         let containerID = '';
-        let image = '';
+        let containerImage = '';
+        let containerStatus = '';
         //pause JS runtime at this line so that no further code will execute 
         //until the async function has returned it's result.
         const containers = await docker.listContainers({ all : false });
         containers.forEach(container => {
             containerID = container.Id.slice(0,12);
             containerName = container.Names[0];
-            image = container.Image;
+            containerImage = container.Image;
+            containerStatus = container.Status;
+            
             runningContainers.push({
                 "Id": containerID,
                 "Name": containerName,
-                "Image": image
+                "Image": containerImage,
+                "Status": containerStatus
             });
         })
 
