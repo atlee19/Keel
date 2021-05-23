@@ -33,14 +33,12 @@
     /* background-image: linear-gradient(#0bbcf1,#05acdd); */
 }
 
+
 /* handle user cursor settings */
-.activeContainer {
+.activeContainer:hover {
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
-}
-
-.activeContainer:hover {
     background-color: #272727;
 }
 
