@@ -23,8 +23,12 @@ const displayContainers = (function(){
             containerList.innerHTML += `
                 <li id=${container.Id} class="activeContainer">${container.Name}
                     <ul class="containerMetaData">
-                        <li style="display: inline;">image: ${container.Image}</li>
-                        <li style="display: inline; margin-left: 3%">id: ${container.Id}</li>
+                        <li style="display: inline;">
+                            <span style="color: #646464">image:</span>${container.Image}
+                        </li>
+                        <li style="display: inline; margin-left: 3%">
+                            <span style="color: #646464">id:</span>${container.Id}
+                        </li>
                     </ul>
                 </li>`;
         });
