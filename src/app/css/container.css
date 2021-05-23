@@ -40,6 +40,10 @@
     -webkit-user-select: none;
 }
 
+.activeContainer:hover {
+    background-color: #272727;
+}
+
 .activeContainer:before, .activeContainer:after { 
     position: absolute; 
     top: 0; 
