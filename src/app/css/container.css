@@ -11,7 +11,9 @@
 
 @font-face {
     font-family: SFProDisplay-Regular;
+    font-family: SFProDisplay-Semibold;
     src: url(../assets/fonts/SFProDisplay-Regular.ttf);
+    src: url(../assets/fonts/SFProDisplay-Semibold.ttf);
 }
 
 
@@ -19,7 +21,7 @@
 .activeContainer { 
     color: #df5224;
     background-color: #171717;
-    font-family: SFProDisplay-Regular;
+    font-family: SFProDisplay-Semibold;
     width:  100%; 
     height: auto; 
     min-height: 50px; 
