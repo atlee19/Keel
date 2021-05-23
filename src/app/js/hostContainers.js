@@ -42,14 +42,16 @@ const hostContainers = (function(){
         return runningContainers;
     }
 
-    function stopSpecificContainer(containerId){
-        docker.getContainer(containerId).stop();
+    async function stopSpecificContainer(containerId){
+        let containerStopped = await docker.getContainer(containerId).stop();
 
-        //display notification to user that container has been stopped
-        //TO-DO: this should only be displayed once the container has TRULY been stopped
-        const myNotification = new Notification('Container stopped', {
-            body: `${containerId} has been stopped.`
-        })
+        if(containerStopped){
+            //display notification to user that container has been stopped
+            const myNotification = new Notification('Container stopped', {
+                body: `${containerId} has been stopped.`
+            })
+        }
+      
     }
 
     return{
