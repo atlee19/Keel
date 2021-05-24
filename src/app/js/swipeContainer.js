@@ -86,7 +86,7 @@ const swipeContainers = (function (){
     }
 
     //the function that actually triggers deleting the container.
-    function _setContainerDelete(container) {
+    function _removeContainer(container) {
         //slide off screen to the left
         container.style.transform = 'translateX(-120%)';
         //animate height to 0 then remove
@@ -119,7 +119,7 @@ const swipeContainers = (function (){
         if (percentage > dragOffsetToUpdate && !container.classList.contains(classComplete)) _stopContainer(container);
         //if container dragged left beyond the threshold and released then set delete the container
         //will be called 
-        if (percentage < dragOffsetToUpdate * -1) _setContainerDelete(container);
+        if (percentage < dragOffsetToUpdate * -1) _removeContainer(container);
     }
 
     //	Bind events
