@@ -92,6 +92,9 @@ const swipeContainers = (function (){
         //animate height to 0 then remove
         setTimeout(() => _animateContainerHeight(container), 350);
         setTimeout(() => container.parentNode.removeChild(container), 500);
+
+        //call to dockerode service to stop and delete the container
+        hostContainers.DeleteSpecificContainer(container.id);
     }
 
     //Actions

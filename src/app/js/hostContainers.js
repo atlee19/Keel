@@ -54,9 +54,20 @@ const hostContainers = (function(){
       
     }
 
+    async function deleteSpecificContainer(containerId){
+        //get the container and stop it
+        await stopSpecificContainer(containerId);
+        let container = docker.getContainer(containerId);
+        //then delete it 
+        let containerDeleted = container.remove();
+        console.log(containerDeleted);
+        console.log('container deleted...');
+    }
+
     return{
         GetListOfActiveContainers: getListOfActiveContainers,
-        StopSpecificContainer: stopSpecificContainer
+        StopSpecificContainer: stopSpecificContainer,
+        DeleteSpecificContainer: deleteSpecificContainer
     }
 
 })();
