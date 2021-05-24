@@ -52,14 +52,14 @@
 }
 
 .activeContainer:before { 
-    /* checkmark thing */
-    /* content: "\2714";  */
-    content: "\274E";
+    /* stop glyph */
+    content: "\25A2";
     left: -40px;
 }
 
 .activeContainer:after { 
-    content: "\2718"; /* x mark thing */
+    /* exit glyph */
+    content: "\2715";
     right: -40px; 
 }
 
