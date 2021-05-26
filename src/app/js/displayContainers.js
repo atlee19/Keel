@@ -22,17 +22,17 @@ const displayContainers = (function(){
         containerData.forEach(container => {
             containerList.innerHTML += `
                 <li id=${container.Id} class="activeContainer">${container.Name}
-                    <ul class="containerMetaData">
-                        <li style="display: inline;">
-                            <span style="color: #646464">image:   </span>${container.Image}
+                    <ul id="metaData" class="containerMetaData">
+                        <li id="metaData" style="display: inline;">
+                            <span id="metaData" style="color: #646464">image:   </span>${container.Image}
                         </li>
                         
-                        <li style="display: inline; margin-left: 10%">
-                            <span style="color: #646464">id:   </span>${container.Id}
+                        <li id="metaData" style="display: inline; margin-left: 10%">
+                            <span id="metaData" style="color: #646464">id:   </span>${container.Id}
                         </li>
 
-                        <li style="display: inline; margin-left: 10%">
-                            <span style="color: #646464">status:   </span>${container.Status}
+                        <li id="metaData" style="display: inline; margin-left: 10%">
+                            <span id="metaData" style="color: #646464">status:   </span>${container.Status}
                         </li>
                     </ul>
                 </li>`;

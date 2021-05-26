@@ -155,22 +155,31 @@ const swipeContainers = (function (){
         //	cancel if right-click
         if (e.buttons !== 1) return;
         let container = e.target;
-        initialX = _getPointerX(e);
-        //	reset transition
-        container.style.transition = '';
-        //	bind mouse events
-        _bindMouseMove(container);
-        _bindMouseUp(container);
-        _bindMouseLeave(container);
+
+        //temp solution: don't even let container's children be touched
+        if(container.id !== 'metaData'){
+            initialX = _getPointerX(e);
+            //	reset transition
+            container.style.transition = '';
+            //	bind mouse events
+            _bindMouseMove(container);
+            _bindMouseUp(container);
+            _bindMouseLeave(container);
+        }
+      
     }
 
     function _eventMouseMove(e) {
+        //if we get the children (metaData list) then we need to get the parent
+        //node as well so it all drags together 
+        //need a way to check if we got 1 of 2 children: the UL or LI 
         let container = e.target;
-        let offsetX = _getPointerX(e);
-        //	set transform to offset
+        let offsetX = _getPointerX(e);  //	set transform to offset
+
+        //this line is what enables the dragging with mouse on x axis 
         container.style.transform = `translateX(${Math.floor(offsetX - initialX)}px)`;
-        //	update visual
-        _updateContainerStyle(container);
+        //update visual
+        _updateContainerStyle(container);    
     }
 
     function _eventMouseUp(e) {
