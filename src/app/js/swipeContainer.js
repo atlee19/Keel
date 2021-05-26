@@ -156,6 +156,7 @@ const swipeContainers = (function (){
         if (e.buttons !== 1) return;
         let container = e.target;
 
+        //problem: the mouse picks up a container's children and creates wonky dragging mess.
         //temp solution: don't even let container's children be touched
         if(container.id !== 'metaData'){
             initialX = _getPointerX(e);
@@ -170,9 +171,6 @@ const swipeContainers = (function (){
     }
 
     function _eventMouseMove(e) {
-        //if we get the children (metaData list) then we need to get the parent
-        //node as well so it all drags together 
-        //need a way to check if we got 1 of 2 children: the UL or LI 
         let container = e.target;
         let offsetX = _getPointerX(e);  //	set transform to offset
 
